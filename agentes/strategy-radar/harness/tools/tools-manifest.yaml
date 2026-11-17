@@ -1,0 +1,33 @@
+# Manifiesto de tools - Strategic Opportunity Radar
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: search_knowledge
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Recuperar plan estratégico, roadmap y análisis de mercado aprobados desde la KB del agente."
+  - name: get_strategy_metrics
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer métricas de iniciativas y mercado (penetración, crecimiento, share) desde vistas allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: search_mail
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar señales internas (alertas comerciales, feedback de clientes clave) en hilos autorizados."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_opportunity_map
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Construir la matriz oportunidad-impacto-evidencia a partir de las fuentes recuperadas."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

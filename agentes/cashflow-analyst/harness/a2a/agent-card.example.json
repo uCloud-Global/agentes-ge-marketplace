@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Cashflow Forecast Analyst",
+  "description": "Genera proyecciones de caja con datos operativos, escenarios y supuestos explícitos.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/cashflow-analyst",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "forecast-model",
+      "name": "forecast-model",
+      "description": "El usuario pide proyectar flujo de caja o liquidez.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": [
+        "Proyecta el flujo de caja de las próximas 12 semanas con escenarios."
+      ]
+    },
+    {
+      "id": "liquidity-alert",
+      "name": "liquidity-alert",
+      "description": "El usuario pregunta si habrá déficit de caja.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": []
+    },
+    {
+      "id": "forecast-backtest",
+      "name": "forecast-backtest",
+      "description": "Se pide medir la precisión del forecast.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": []
+    }
+  ]
+}

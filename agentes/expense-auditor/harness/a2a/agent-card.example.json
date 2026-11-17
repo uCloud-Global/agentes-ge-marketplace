@@ -1,0 +1,40 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Expense Policy Auditor",
+  "description": "Verifica reportes de gastos contra políticas de viáticos y detecta excepciones.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/expense-auditor",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "expense-audit",
+      "name": "expense-audit",
+      "description": "El usuario pide auditar gastos de un viaje o periodo.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": [
+        "Audita los gastos del último viaje y marca los que exceden política."
+      ]
+    },
+    {
+      "id": "fx-normalization",
+      "name": "fx-normalization",
+      "description": "Gastos en varias monedas.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": []
+    }
+  ]
+}

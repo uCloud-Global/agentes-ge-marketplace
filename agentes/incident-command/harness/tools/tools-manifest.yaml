@@ -1,0 +1,40 @@
+# Manifiesto de tools - Incident Response Coordinator
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: query_logs
+    source: mcp:cloud-logging
+    route: "MCP predefinido - Cloud Logging"
+    effect: read
+    ask_before_call: false
+    purpose: "Consultar logs filtrados por servicio, severidad y ventana de tiempo."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_alerts
+    source: mcp:cloud-monitoring
+    route: "MCP predefinido - Cloud Monitoring"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer alertas activas, métricas de error y latencia."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: search_runbook
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Buscar runbooks, postmortems y matriz de severidad."
+  - name: query_deploys
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer historial de despliegues/cambios recientes para correlación."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_incident_report
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: draft
+    ask_before_call: true
+    purpose: "Crear BORRADOR de informe/comunicación de incidente a guardias."
+    mcp_tool_real: "<confirmar en List tools>"

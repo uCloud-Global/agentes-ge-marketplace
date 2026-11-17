@@ -1,0 +1,87 @@
+# Agent Harness Kit - Talent Selection Evidence Analyst
+# Mapea 1:1 con la UI de VirtuAI (Agents → New agent / pestañas del agente).
+# No es un formato de importación nativo: el import nativo es por Git (AGENTS.md + skills/*/SKILL.md) o .virtuai.json.
+
+agent:
+  id: talent-selection            # ID inmutable sugerido
+  name: "Talent Selection Evidence Analyst"
+  description: "Contrasta los requisitos objetivos de una vacante con evidencias aportadas por CVs, construye una matriz uniforme y genera un radar polar para revisión humana. No decide contrataciones."
+  group: "Talento"
+  tags: [talento, agentes-ge, a2a, hitl]
+  agent_type: deep   # Classic = conversacional; Deep = planificación, skills, memoria, sub-agentes, workspace
+
+model:                       # Settings → Models & providers + pestaña Model
+  provider: vertex-ai          # VERTEX_AI_SERVICE_ACCOUNT_JSON / VERTEX_AI_PROJECT_ID / VERTEX_AI_LOCATION
+  model: "Gemini Pro (última versión GA aprobada en Vertex AI)"
+  allowed_models_web_chat: []  # vacío = solo el modelo fijado
+  temperature: 0.1
+  max_output_tokens: 10000   # el default de VirtuAI (1000) es insuficiente para este agente
+
+native_capabilities:
+  thinking: {enabled: true, effort: high}
+  show_reasoning: false
+  prompt_caching: true
+  web_search: false
+  web_fetch: false
+  tool_search: false
+
+instructions:
+  system_prompt_file: AGENTS.md
+  skills:                    # Build → Skills, luego Instructions → Skills
+    - cv-competency-review
+    - bias-safeguard
+    - interview-guide
+
+memory:
+  enabled: true              # 16 KB, global y compartida entre usuarios: sin PII
+  initial_memory: "Escala de evidencia 0–5. Rúbricas versionadas por vacante en el ATS. Nunca almacenar datos de candidatos en memoria."
+  admin_alerts_on_change: true
+
+knowledge_bases:
+  - kb-talent-selection              # ver harness/knowledge-base.yaml
+
+tools:
+  mcp_servers: []   # ver harness/tools/mcp-servers.md
+  custom_tools: [get_job_profile, extract_cv_evidence, standardize_role_rubric]   # ver harness/tools/custom/
+  builtin: []
+  manifest: harness/tools/tools-manifest.yaml
+
+execution:                   # Deep: Workstation → CLI emparejada → sandbox E2B → FS virtual
+  environment: workstation   # requiere plan Enterprise (Build → Workstations/Sandboxes)
+  ask_before_running_commands: true
+
+security:
+  read_only: false
+  ask_before_running_commands: true
+  standing_approvals: []      # no conceder "Always allow" a tools de escritura
+
+channels:                    # pestaña Channels
+  a2a: true                   # Gemini Enterprise
+  web_chat: true              # solo para pruebas internas; desactivar si no se usa
+  google_chat: false
+  slack: false
+  telegram: false
+  cli: false
+
+versioning:
+  enabled: true               # activar ANTES de editar producción
+
+publishing_policy:
+  require_second_approver: true
+  min_eval_pass_rate: 90
+
+guardrails:                  # Enterprise - Monitor → Classifiers (inicia en shadow mode)
+  classifiers: [prompt_injection, off_topic, shell_risk]
+  mode: shadow                # pasar a enforce tras 2 semanas de observación
+  restrict_automatically: false
+
+budget:
+  monthly_limit_usd: TBD
+  alerts_percent: [50, 80, 100]
+
+evaluations:
+  dataset: eval-talent-selection   # ver harness/evals/eval-dataset.json
+  tools_during_run: mock
+
+retention:
+  conversations_days: 90

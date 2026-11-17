@@ -1,0 +1,26 @@
+# Manifiesto de tools - Marketing Performance Analyst
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_campaigns
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer campañas, fuentes y oportunidades asociadas."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: run_readonly_query
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Ejecutar SELECT sobre datasets de marketing allowlisted con límite de filas."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: draft_insights
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar insights y explicación de variaciones."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

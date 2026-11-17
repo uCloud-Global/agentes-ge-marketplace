@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Incident Response Coordinator",
+  "description": "Correlaciona alertas, logs y runbooks para crear un informe accionable de incidentes.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/incident-command",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "incident-triage",
+      "name": "incident-triage",
+      "description": "El usuario reporta errores, caída, degradación o pide analizar un incidente.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": [
+        "Analiza los errores 5xx del servicio de pagos durante la última hora."
+      ]
+    },
+    {
+      "id": "postmortem-draft",
+      "name": "postmortem-draft",
+      "description": "El incidente terminó y se pide postmortem.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": []
+    },
+    {
+      "id": "log-pii-safe-summary",
+      "name": "log-pii-safe-summary",
+      "description": "Se debe compartir evidencia de logs.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": []
+    }
+  ]
+}

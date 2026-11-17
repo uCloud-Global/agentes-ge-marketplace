@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Sales CRM Copilot",
+  "description": "Consulta cuentas, oportunidades y actividad comercial; prepara seguimiento y próximos pasos en HubSpot.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/sales-copilot",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "sales-followup",
+      "name": "sales-followup",
+      "description": "El usuario pide preparar seguimientos, próximos pasos o correos para oportunidades.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": [
+        "Revisa mis 10 oportunidades en riesgo y prepara seguimientos personalizados."
+      ]
+    },
+    {
+      "id": "deal-risk-review",
+      "name": "deal-risk-review",
+      "description": "El usuario pregunta qué oportunidades están en riesgo o pide revisar su pipeline.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    },
+    {
+      "id": "crm-update-approval",
+      "name": "crm-update-approval",
+      "description": "Se requiere modificar un deal, etapa, monto o propiedad en HubSpot.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    }
+  ]
+}

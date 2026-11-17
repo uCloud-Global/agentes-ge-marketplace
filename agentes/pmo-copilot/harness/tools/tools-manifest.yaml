@@ -1,0 +1,41 @@
+# Manifiesto de tools - Project PMO Copilot
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: read_project_docs
+    source: mcp:drive
+    route: "MCP predefinido - Google Drive"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer actas, plan de proyecto y RACI."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_milestones
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer hitos y estado desde la hoja maestra de proyectos (Sheets vía API)."
+    config: harness/tools/custom/get_milestones.tool.json
+  - name: list_meetings
+    source: mcp:calendar
+    route: "MCP predefinido - Google Calendar"
+    effect: read
+    ask_before_call: false
+    purpose: "Consultar comités y reuniones de seguimiento próximas."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_status
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar status report RAG."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: draft_followup
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: draft
+    ask_before_call: true
+    purpose: "Crear BORRADOR de seguimiento a responsables."
+    mcp_tool_real: "<confirmar en List tools>"

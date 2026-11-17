@@ -1,0 +1,34 @@
+{
+  "_comment": "Valores para Build → Tools → Add tool (formulario New Tool de VirtuAI). No es un archivo de importación nativo; el endpoint es ilustrativo y debe implementarse.",
+  "Tool Name": "get_catalog",
+  "LLM Description": "Consultar catálogo de proveedores homologados y precios de referencia. Úsala solo cuando la tarea de compras lo requiera. Envía únicamente los parámetros necesarios; si recibes 400/403/404/429/5xx o timeout, informa el error y no inventes resultados. No modifica registros.",
+  "Visual Description": "Consultar catálogo de proveedores homologados y precios de referencia.",
+  "API Endpoint": "https://TU-SERVICIO.run.app/v1/agents/procurement-assistant/get_catalog",
+  "HTTP Method": "GET",
+  "Timeout (seconds)": 30,
+  "Ask before each call": false,
+  "Headers (JSON)": {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  },
+  "Authentication": "Google Cloud Run (IAM / Service Account)",
+  "Parameters": [
+    {
+      "name": "resource_id",
+      "type": "string",
+      "description": "Identificador validado del registro o recurso; ej. OBJ-001",
+      "required": true
+    },
+    {
+      "name": "period",
+      "type": "string",
+      "description": "Periodo ISO opcional (YYYY-MM o rango)",
+      "required": false
+    }
+  ],
+  "Backend requirements": [
+    "Validar autorización por registro/entidad en el backend (el modelo no valida permisos).",
+    "Rechazar parámetros fuera de esquema; no aceptar rutas/URLs arbitrarias.",
+    "Responder JSON; errores con código HTTP real (VirtuAI no reintenta)."
+  ]
+}

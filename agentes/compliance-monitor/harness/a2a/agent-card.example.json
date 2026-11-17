@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Compliance Control Monitor",
+  "description": "Monitorea evidencias y vencimientos internos de controles, contratos y políticas.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/compliance-monitor",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "control-audit",
+      "name": "control-audit",
+      "description": "El usuario pide el estado de controles o evidencias del periodo.",
+      "tags": [
+        "legal"
+      ],
+      "examples": [
+        "¿Qué controles de cumplimiento tienen evidencia incompleta este mes?"
+      ]
+    },
+    {
+      "id": "deadline-watch",
+      "name": "deadline-watch",
+      "description": "Se pregunta por vencimientos próximos.",
+      "tags": [
+        "legal"
+      ],
+      "examples": []
+    },
+    {
+      "id": "evidence-quality-check",
+      "name": "evidence-quality-check",
+      "description": "Revisar si una evidencia es suficiente.",
+      "tags": [
+        "legal"
+      ],
+      "examples": []
+    }
+  ]
+}

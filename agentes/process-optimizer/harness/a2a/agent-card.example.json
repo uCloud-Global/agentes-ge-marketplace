@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Process Improvement Scout",
+  "description": "Analiza procedimientos y logs para detectar cuellos de botella y oportunidades de automatización.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/process-optimizer",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "process-improvement",
+      "name": "process-improvement",
+      "description": "El usuario pide analizar un proceso, cuellos de botella u oportunidades de automatización.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": [
+        "Analiza el proceso de aprobación de compras y dónde se pierde tiempo."
+      ]
+    },
+    {
+      "id": "process-mining-lite",
+      "name": "process-mining-lite",
+      "description": "Hay log de eventos disponible.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": []
+    },
+    {
+      "id": "automation-business-case",
+      "name": "automation-business-case",
+      "description": "Se pide justificar una automatización.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": []
+    }
+  ]
+}

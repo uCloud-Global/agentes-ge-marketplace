@@ -1,0 +1,34 @@
+# Manifiesto de tools - Data Quality Sentinel
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_freshness
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer última actualización por tabla desde INFORMATION_SCHEMA."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: run_quality_checks
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: compute
+    ask_before_call: false
+    purpose: "Ejecutar reglas de calidad (nulos, duplicados, rangos) como SELECT."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: query_pipeline_logs
+    source: mcp:cloud-logging
+    route: "MCP predefinido - Cloud Logging"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer errores de pipelines asociados a las tablas."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_issue
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar incidente de calidad propuesto."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

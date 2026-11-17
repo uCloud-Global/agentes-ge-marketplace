@@ -1,0 +1,19 @@
+# Knowledge Base - Process Improvement Scout  (Build → Knowledge Base → Create Knowledge Base)
+name: kb-process-optimizer
+description: "Documentos aprobados de Operaciones para Process Improvement Scout: SOP actuales; Métricas operativas; Flujogramas. Consultar para políticas, definiciones y procedimientos; no contiene datos en vivo."
+documents:   # PDF, DOCX, XLSX/XLS, CSV, PPTX (solo texto; PDFs escaneados fallan)
+  - "SOP actuales"
+  - "Métricas operativas"
+  - "Flujogramas"
+advanced_rag:
+  chunk_size: 2500
+  chunk_overlap: 250
+  results_per_query: 8
+  score_threshold: 0.0
+  search_strategy: "MMR (Diverse)"
+  mmr_fetch_k: 20
+  diversity_lambda: 0.5
+governance:
+  - "Una KB compartida NO replica los ACL de Drive: subir solo documentos visibles para todos los usuarios del agente."
+  - "Datos en vivo: vía MCP o Custom Tool, no vía KB."
+  - "Esperar estado completed y probar recuperación de pasajes antes de publicar."

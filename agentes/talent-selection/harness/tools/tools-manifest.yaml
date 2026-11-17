@@ -1,0 +1,47 @@
+# Manifiesto de tools - Talent Selection Evidence Analyst
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_job_profile
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer descripción y requisitos de la vacante autorizada (ATS vía Cloud Run)."
+    config: harness/tools/custom/get_job_profile.tool.json
+  - name: extract_cv_evidence
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Extraer evidencias profesionales pertinentes de un CV autorizado, eliminando atributos protegidos."
+    config: harness/tools/custom/extract_cv_evidence.tool.json
+  - name: standardize_role_rubric
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Obtener rúbrica versionada (competencias, pesos, objetivos) aprobada por Talento."
+    config: harness/tools/custom/standardize_role_rubric.tool.json
+  - name: build_evidence_matrix
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Construir matriz uniforme candidato × competencia con cita de evidencia o NO OBSERVADO."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: render_skills_radar
+    source: workstation
+    route: "Deep Agent - Workstation / sandbox (Python)"
+    effect: compute
+    ask_before_call: true
+    purpose: "Generar radar polar con harness/tools/scripts/render_skills_radar.py (Workstation o Cloud Run)."
+    note: "Deep Agent ejecuta Python en Workstation/sandbox (Enterprise). Alternativa: Custom Tool a Cloud Run."
+  - name: draft_interview_questions
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Proponer preguntas de entrevista para validar vacíos de evidencia."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

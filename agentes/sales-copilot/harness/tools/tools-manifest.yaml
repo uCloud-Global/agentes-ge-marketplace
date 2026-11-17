@@ -1,0 +1,41 @@
+# Manifiesto de tools - Sales CRM Copilot
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: search_deals
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar deals del usuario por etapa, fecha de cierre, monto y última actividad."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_contact_timeline
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer actividades, correos y reuniones asociadas a un contacto o deal."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: list_meetings
+    source: mcp:calendar
+    route: "MCP predefinido - Google Calendar"
+    effect: read
+    ask_before_call: false
+    purpose: "Consultar reuniones próximas con la cuenta para proponer siguiente paso."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_followup
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: draft
+    ask_before_call: true
+    purpose: "Crear BORRADOR de correo en Gmail del usuario (nunca enviar)."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: update_deal_stage
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: write
+    ask_before_call: true
+    purpose: "Actualizar etapa/propiedades de un deal. Escritura: requiere Ask y aprobación explícita."
+    mcp_tool_real: "<confirmar en List tools>"

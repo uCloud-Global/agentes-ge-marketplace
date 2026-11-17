@@ -1,0 +1,87 @@
+# Agent Harness Kit - Commercial Proposal Studio
+# Mapea 1:1 con la UI de VirtuAI (Agents → New agent / pestañas del agente).
+# No es un formato de importación nativo: el import nativo es por Git (AGENTS.md + skills/*/SKILL.md) o .virtuai.json.
+
+agent:
+  id: proposal-builder            # ID inmutable sugerido
+  name: "Commercial Proposal Studio"
+  description: "Arma propuestas usando contexto de cliente, catálogo de servicios y pricing autorizado."
+  group: "Ventas"
+  tags: [ventas, agentes-ge, a2a, hitl]
+  agent_type: deep   # Classic = conversacional; Deep = planificación, skills, memoria, sub-agentes, workspace
+
+model:                       # Settings → Models & providers + pestaña Model
+  provider: vertex-ai          # VERTEX_AI_SERVICE_ACCOUNT_JSON / VERTEX_AI_PROJECT_ID / VERTEX_AI_LOCATION
+  model: "Gemini Pro (última versión GA aprobada en Vertex AI)"
+  allowed_models_web_chat: []  # vacío = solo el modelo fijado
+  temperature: 0.4
+  max_output_tokens: 10000   # el default de VirtuAI (1000) es insuficiente para este agente
+
+native_capabilities:
+  thinking: {enabled: true, effort: medium}
+  show_reasoning: false
+  prompt_caching: true
+  web_search: false
+  web_fetch: false
+  tool_search: false
+
+instructions:
+  system_prompt_file: AGENTS.md
+  skills:                    # Build → Skills, luego Instructions → Skills
+    - proposal-writing
+    - scope-estimator
+    - pricing-guardrail
+
+memory:
+  enabled: true              # 16 KB, global y compartida entre usuarios: sin PII
+  initial_memory: "Estructura estándar de propuesta en plantilla \"Propuesta v3\" (KB). Moneda por defecto: la del deal."
+  admin_alerts_on_change: true
+
+knowledge_bases:
+  - kb-proposal-builder              # ver harness/knowledge-base.yaml
+
+tools:
+  mcp_servers: [BigQuery, Google Drive, HubSpot]   # ver harness/tools/mcp-servers.md
+  custom_tools: [create_doc]   # ver harness/tools/custom/
+  builtin: []
+  manifest: harness/tools/tools-manifest.yaml
+
+execution:                   # Deep: Workstation → CLI emparejada → sandbox E2B → FS virtual
+  environment: virtual-fs   # sin shell: no se requiere workstation
+  ask_before_running_commands: true
+
+security:
+  read_only: false
+  ask_before_running_commands: true
+  standing_approvals: []      # no conceder "Always allow" a tools de escritura
+
+channels:                    # pestaña Channels
+  a2a: true                   # Gemini Enterprise
+  web_chat: true              # solo para pruebas internas; desactivar si no se usa
+  google_chat: false
+  slack: false
+  telegram: false
+  cli: false
+
+versioning:
+  enabled: true               # activar ANTES de editar producción
+
+publishing_policy:
+  require_second_approver: true
+  min_eval_pass_rate: 90
+
+guardrails:                  # Enterprise - Monitor → Classifiers (inicia en shadow mode)
+  classifiers: [prompt_injection, off_topic]
+  mode: shadow                # pasar a enforce tras 2 semanas de observación
+  restrict_automatically: false
+
+budget:
+  monthly_limit_usd: TBD
+  alerts_percent: [50, 80, 100]
+
+evaluations:
+  dataset: eval-proposal-builder   # ver harness/evals/eval-dataset.json
+  tools_during_run: mock
+
+retention:
+  conversations_days: 365

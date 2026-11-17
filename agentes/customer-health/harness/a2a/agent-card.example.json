@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Customer Success Health",
+  "description": "Detecta cuentas con señales de abandono y recomienda acciones de retención medibles.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/customer-health",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "customer-health",
+      "name": "customer-health",
+      "description": "El usuario pregunta por clientes en riesgo de churn o salud de la cartera.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": [
+        "¿Qué clientes están en riesgo de churn y qué acciones recomendarías?"
+      ]
+    },
+    {
+      "id": "renewal-prep",
+      "name": "renewal-prep",
+      "description": "Se acerca una renovación o QBR de una cuenta.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": []
+    },
+    {
+      "id": "churn-signal-review",
+      "name": "churn-signal-review",
+      "description": "El usuario pide revisar una cuenta específica.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": []
+    }
+  ]
+}

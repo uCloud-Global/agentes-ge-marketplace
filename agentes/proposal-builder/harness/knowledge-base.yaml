@@ -1,0 +1,18 @@
+# Knowledge Base - Commercial Proposal Studio  (Build → Knowledge Base → Create Knowledge Base)
+name: kb-proposal-builder
+description: "Documentos aprobados de Ventas para Commercial Proposal Studio: Tarifas vigentes; Portafolio; Plantillas de propuesta; Términos estándar. Consultar para políticas, definiciones y procedimientos; no contiene datos en vivo."
+documents:   # PDF, DOCX, XLSX/XLS, CSV, PPTX (solo texto; PDFs escaneados fallan)
+  - "Tarifas vigentes"
+  - "Portafolio"
+  - "Plantillas de propuesta"
+  - "Términos estándar"
+advanced_rag:
+  chunk_size: 2000
+  chunk_overlap: 200
+  results_per_query: 5
+  score_threshold: 0.0
+  search_strategy: "Similarity"
+governance:
+  - "Una KB compartida NO replica los ACL de Drive: subir solo documentos visibles para todos los usuarios del agente."
+  - "Datos en vivo: vía MCP o Custom Tool, no vía KB."
+  - "Esperar estado completed y probar recuperación de pasajes antes de publicar."

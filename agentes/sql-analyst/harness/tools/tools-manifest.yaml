@@ -1,0 +1,32 @@
+# Manifiesto de tools - Enterprise Data Analyst
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: discover_schema
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Listar datasets/tablas/columnas permitidos y descripciones."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: validate_sql
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: compute
+    ask_before_call: false
+    purpose: "Dry-run de la consulta: sintaxis, bytes a procesar y tipo de sentencia."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: run_readonly_query
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Ejecutar SELECT con LIMIT y tope de bytes sobre datasets allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: explain_metrics
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Recuperar definición oficial de métricas del catálogo."

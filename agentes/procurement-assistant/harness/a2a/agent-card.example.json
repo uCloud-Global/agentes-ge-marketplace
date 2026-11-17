@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Purchase Request Assistant",
+  "description": "Convierte solicitudes libres en requisiciones completas y listas para aprobación.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/procurement-assistant",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "purchase-request",
+      "name": "purchase-request",
+      "description": "El usuario expresa una necesidad de compra en lenguaje libre.",
+      "tags": [
+        "compras"
+      ],
+      "examples": [
+        "Necesitamos 12 portátiles para un nuevo equipo: prepara la solicitud de compra."
+      ]
+    },
+    {
+      "id": "approval-matrix-check",
+      "name": "approval-matrix-check",
+      "description": "Hay que determinar quién aprueba.",
+      "tags": [
+        "compras"
+      ],
+      "examples": []
+    },
+    {
+      "id": "quote-comparison",
+      "name": "quote-comparison",
+      "description": "Se requieren cotizaciones o comparar proveedores.",
+      "tags": [
+        "compras"
+      ],
+      "examples": []
+    }
+  ]
+}

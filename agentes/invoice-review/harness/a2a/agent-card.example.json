@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Accounts Payable Reviewer",
+  "description": "Concilia facturas, órdenes y proveedores; marca discrepancias antes del pago.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/invoice-review",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "invoice-matching",
+      "name": "invoice-matching",
+      "description": "El usuario pide revisar facturas recibidas o conciliar contra órdenes de compra.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": [
+        "Revisa las facturas recibidas hoy y detecta diferencias frente a sus órdenes."
+      ]
+    },
+    {
+      "id": "vendor-bank-change-alert",
+      "name": "vendor-bank-change-alert",
+      "description": "La factura muestra datos bancarios distintos a los registrados.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": []
+    },
+    {
+      "id": "duplicate-invoice-check",
+      "name": "duplicate-invoice-check",
+      "description": "Se sospecha factura duplicada.",
+      "tags": [
+        "finanzas"
+      ],
+      "examples": []
+    }
+  ]
+}

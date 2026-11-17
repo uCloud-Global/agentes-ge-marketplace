@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Employee Onboarding Navigator",
+  "description": "Coordina incorporaciones: checklist, documentos, calendario y solicitudes de acceso.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/onboarding-agent",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "employee-onboarding",
+      "name": "employee-onboarding",
+      "description": "El usuario pide preparar la incorporación de una persona nueva.",
+      "tags": [
+        "talento"
+      ],
+      "examples": [
+        "Prepara el onboarding de una persona que ingresa el próximo lunes al equipo de datos."
+      ]
+    },
+    {
+      "id": "access-request-builder",
+      "name": "access-request-builder",
+      "description": "Hay que definir los accesos iniciales de una persona.",
+      "tags": [
+        "talento"
+      ],
+      "examples": []
+    },
+    {
+      "id": "first-week-plan",
+      "name": "first-week-plan",
+      "description": "El manager pide un plan de primera semana.",
+      "tags": [
+        "talento"
+      ],
+      "examples": []
+    }
+  ]
+}

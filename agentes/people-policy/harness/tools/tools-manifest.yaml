@@ -1,0 +1,18 @@
+# Manifiesto de tools - People Policy Advisor
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: search_approved_policy
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Buscar el fragmento exacto de política aprobada por país y vigencia."
+  - name: get_policy_version
+    source: mcp:drive
+    route: "MCP predefinido - Google Drive"
+    effect: read
+    ask_before_call: false
+    purpose: "Verificar versión y fecha de vigencia del documento fuente en Drive."
+    mcp_tool_real: "<confirmar en List tools>"

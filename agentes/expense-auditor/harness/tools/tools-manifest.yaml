@@ -1,0 +1,25 @@
+# Manifiesto de tools - Expense Policy Auditor
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_expenses
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer reportes de gastos por empleado/viaje desde vistas allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: read_policy
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Leer política de viáticos y tabla de topes vigente."
+  - name: flag_exceptions
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Listar excepciones con evidencia (sin rechazar)."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

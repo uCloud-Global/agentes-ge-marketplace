@@ -1,0 +1,41 @@
+# Manifiesto de tools - Commercial Proposal Studio
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_company
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer empresa, deal, contactos y notas de discovery asociadas."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_rate_card
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer tarifas vigentes y reglas de descuento desde la tabla oficial de pricing."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: search_templates
+    source: mcp:drive
+    route: "MCP predefinido - Google Drive"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar plantillas de propuesta y términos estándar aprobados."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_proposal
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar el contenido de la propuesta con supuestos y precios citados."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: create_doc
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: write
+    ask_before_call: true
+    purpose: "Crear Google Doc desde plantilla en carpeta autorizada (Docs API vía Cloud Run). Escritura con Ask."
+    config: harness/tools/custom/create_doc.tool.json

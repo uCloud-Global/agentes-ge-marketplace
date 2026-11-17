@@ -1,0 +1,41 @@
+# Manifiesto de tools - Campaign Launch Copilot
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_segments
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer listas/segmentos con conteo y criterio de consentimiento."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: read_campaign_metrics
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer métricas históricas de campañas desde Sheets de marketing (API controlada)."
+    config: harness/tools/custom/read_campaign_metrics.tool.json
+  - name: search_brand_assets
+    source: mcp:drive
+    route: "MCP predefinido - Google Drive"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar brandbook, guía editorial y piezas aprobadas."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_assets
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar asuntos A/B, cuerpos y copies siguiendo guía editorial."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: schedule_campaign
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: write
+    ask_before_call: true
+    purpose: "Programar campaña en estado BORRADOR para revisión. Escritura con Ask; nunca publica."
+    config: harness/tools/custom/schedule_campaign.tool.json

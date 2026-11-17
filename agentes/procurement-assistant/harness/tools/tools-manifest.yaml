@@ -1,0 +1,41 @@
+# Manifiesto de tools - Purchase Request Assistant
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_catalog
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Consultar catálogo de proveedores homologados y precios de referencia."
+    config: harness/tools/custom/get_catalog.tool.json
+  - name: validate_budget
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Validar disponibilidad presupuestal por centro de costo (ERP)."
+    config: harness/tools/custom/validate_budget.tool.json
+  - name: search_requests_mail
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer la solicitud original del usuario si llegó por correo."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_purchase_request
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Construir la requisición estructurada."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: submit_for_approval
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: write
+    ask_before_call: true
+    purpose: "Enviar requisición al flujo de aprobación del ERP. Escritura con Ask."
+    config: harness/tools/custom/submit_for_approval.tool.json

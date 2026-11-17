@@ -1,0 +1,32 @@
+# Manifiesto de tools - IT Helpdesk Concierge
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: search_runbook
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Buscar runbooks y FAQ de TI por síntoma."
+  - name: lookup_asset
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Consultar activo/equipo asignado al usuario en el CMDB."
+    config: harness/tools/custom/lookup_asset.tool.json
+  - name: draft_ticket
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Prellenar ticket con síntomas, pasos realizados y categoría."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: create_ticket
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: write
+    ask_before_call: true
+    purpose: "Crear ticket en ITSM. Escritura con Ask."
+    config: harness/tools/custom/create_ticket.tool.json

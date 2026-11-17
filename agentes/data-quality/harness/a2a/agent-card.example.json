@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Data Quality Sentinel",
+  "description": "Supervisa frescura, duplicados y reglas de calidad de datasets críticos.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/data-quality",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "quality-report",
+      "name": "quality-report",
+      "description": "El usuario pide el estado de calidad o SLA de datasets.",
+      "tags": [
+        "datos"
+      ],
+      "examples": [
+        "¿Qué datasets críticos incumplieron sus SLA de calidad esta semana?"
+      ]
+    },
+    {
+      "id": "anomaly-explain",
+      "name": "anomaly-explain",
+      "description": "Se detecta un salto o caída inusual en un dataset.",
+      "tags": [
+        "datos"
+      ],
+      "examples": []
+    },
+    {
+      "id": "data-contract-check",
+      "name": "data-contract-check",
+      "description": "Validar un dataset contra su contrato de datos.",
+      "tags": [
+        "datos"
+      ],
+      "examples": []
+    }
+  ]
+}

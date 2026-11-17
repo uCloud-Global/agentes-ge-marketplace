@@ -1,0 +1,41 @@
+# Manifiesto de tools - Compliance Control Monitor
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_controls
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer matriz de controles (Sheets vía API) con responsable y frecuencia."
+    config: harness/tools/custom/get_controls.tool.json
+  - name: find_evidence
+    source: mcp:drive
+    route: "MCP predefinido - Google Drive"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar evidencias del periodo en carpetas de cumplimiento."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: query_obligations
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer calendario de obligaciones y vencimientos."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: draft_remediation
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar plan de remediación."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
+  - name: create_alert
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: write
+    ask_before_call: true
+    purpose: "Crear BORRADOR de alerta al responsable del control. Envío requiere aprobación."
+    mcp_tool_real: "<confirmar en List tools>"

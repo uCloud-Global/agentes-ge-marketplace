@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Supplier Risk Analyst",
+  "description": "Evalúa proveedores con historial de entregas, incidencias y cumplimiento contractual.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/supplier-risk",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "supplier-assessment",
+      "name": "supplier-assessment",
+      "description": "El usuario pide evaluar riesgo o desempeño de proveedores.",
+      "tags": [
+        "compras"
+      ],
+      "examples": [
+        "¿Cuáles proveedores muestran incumplimientos recurrentes este trimestre?"
+      ]
+    },
+    {
+      "id": "sla-breach-review",
+      "name": "sla-breach-review",
+      "description": "Se pregunta por incumplimientos de SLA.",
+      "tags": [
+        "compras"
+      ],
+      "examples": []
+    },
+    {
+      "id": "supplier-scorecard",
+      "name": "supplier-scorecard",
+      "description": "Se pide un scorecard periódico.",
+      "tags": [
+        "compras"
+      ],
+      "examples": []
+    }
+  ]
+}

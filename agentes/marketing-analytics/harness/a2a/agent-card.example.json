@@ -1,0 +1,40 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Marketing Performance Analyst",
+  "description": "Atribuye resultados y explica variaciones de campañas utilizando CRM y métricas de rendimiento.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/marketing-analytics",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "campaign-attribution",
+      "name": "campaign-attribution",
+      "description": "El usuario pregunta qué campañas generan resultados u oportunidades.",
+      "tags": [
+        "marketing"
+      ],
+      "examples": [
+        "¿Qué campañas generaron más oportunidades calificadas el último mes?"
+      ]
+    },
+    {
+      "id": "metric-variance",
+      "name": "metric-variance",
+      "description": "El usuario pide explicar caídas o subidas de métricas.",
+      "tags": [
+        "marketing"
+      ],
+      "examples": []
+    }
+  ]
+}

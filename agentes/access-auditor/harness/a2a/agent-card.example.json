@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Access Governance Analyst",
+  "description": "Encuentra permisos amplios, cuentas huérfanas y riesgos de acceso en recursos autorizados.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/access-auditor",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "access-review",
+      "name": "access-review",
+      "description": "El usuario pide revisar permisos excesivos, cuentas huérfanas o recertificación.",
+      "tags": [
+        "seguridad"
+      ],
+      "examples": [
+        "Revisa cuentas con permisos excesivos en los sistemas del proyecto."
+      ]
+    },
+    {
+      "id": "orphan-account-check",
+      "name": "orphan-account-check",
+      "description": "Buscar cuentas huérfanas o inactivas.",
+      "tags": [
+        "seguridad"
+      ],
+      "examples": []
+    },
+    {
+      "id": "sod-conflict-check",
+      "name": "sod-conflict-check",
+      "description": "Verificar segregación de funciones.",
+      "tags": [
+        "seguridad"
+      ],
+      "examples": []
+    }
+  ]
+}

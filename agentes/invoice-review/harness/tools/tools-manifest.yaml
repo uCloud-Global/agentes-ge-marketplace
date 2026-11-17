@@ -1,0 +1,41 @@
+# Manifiesto de tools - Accounts Payable Reviewer
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: extract_invoice
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Extraer campos de factura (proveedor, NIT, fecha, ítems, totales, impuestos) vía Document AI en Cloud Run."
+    config: harness/tools/custom/extract_invoice.tool.json
+  - name: match_po
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: compute
+    ask_before_call: false
+    purpose: "Cruzar factura contra orden de compra y recepción (3-way match) en vistas ERP allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: check_vendor
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Validar proveedor en maestro ERP (estado, cuenta bancaria registrada, listas restrictivas)."
+    config: harness/tools/custom/check_vendor.tool.json
+  - name: search_invoices_mail
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar facturas recibidas en el buzón de cuentas por pagar."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: create_review_case
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: write
+    ask_before_call: true
+    purpose: "Crear caso de revisión en el sistema de AP. Escritura con Ask."
+    config: harness/tools/custom/create_review_case.tool.json

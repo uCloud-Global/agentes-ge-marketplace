@@ -1,0 +1,87 @@
+# Agent Harness Kit - IT Helpdesk Concierge
+# Mapea 1:1 con la UI de VirtuAI (Agents → New agent / pestañas del agente).
+# No es un formato de importación nativo: el import nativo es por Git (AGENTS.md + skills/*/SKILL.md) o .virtuai.json.
+
+agent:
+  id: it-helpdesk            # ID inmutable sugerido
+  name: "IT Helpdesk Concierge"
+  description: "Resuelve incidencias frecuentes con base de conocimiento y crea tickets con contexto."
+  group: "Tecnología"
+  tags: [tecnología, agentes-ge, a2a, hitl]
+  agent_type: deep   # Classic = conversacional; Deep = planificación, skills, memoria, sub-agentes, workspace
+
+model:                       # Settings → Models & providers + pestaña Model
+  provider: vertex-ai          # VERTEX_AI_SERVICE_ACCOUNT_JSON / VERTEX_AI_PROJECT_ID / VERTEX_AI_LOCATION
+  model: "Gemini Flash (última versión GA aprobada en Vertex AI)"
+  allowed_models_web_chat: []  # vacío = solo el modelo fijado
+  temperature: 0.2
+  max_output_tokens: 4000   # el default de VirtuAI (1000) es insuficiente para este agente
+
+native_capabilities:
+  thinking: {enabled: true, effort: low}
+  show_reasoning: false
+  prompt_caching: true
+  web_search: false
+  web_fetch: false
+  tool_search: false
+
+instructions:
+  system_prompt_file: AGENTS.md
+  skills:                    # Build → Skills, luego Instructions → Skills
+    - helpdesk-triage
+    - password-reset-guidance
+    - service-catalog-request
+
+memory:
+  enabled: true              # 16 KB, global y compartida entre usuarios: sin PII
+  initial_memory: "Portal de autoservicio y horarios de mesa de ayuda en KB."
+  admin_alerts_on_change: true
+
+knowledge_bases:
+  - kb-it-helpdesk              # ver harness/knowledge-base.yaml
+
+tools:
+  mcp_servers: []   # ver harness/tools/mcp-servers.md
+  custom_tools: [lookup_asset, create_ticket]   # ver harness/tools/custom/
+  builtin: []
+  manifest: harness/tools/tools-manifest.yaml
+
+execution:                   # Deep: Workstation → CLI emparejada → sandbox E2B → FS virtual
+  environment: virtual-fs   # sin shell: no se requiere workstation
+  ask_before_running_commands: true
+
+security:
+  read_only: false
+  ask_before_running_commands: true
+  standing_approvals: []      # no conceder "Always allow" a tools de escritura
+
+channels:                    # pestaña Channels
+  a2a: true                   # Gemini Enterprise
+  web_chat: true              # solo para pruebas internas; desactivar si no se usa
+  google_chat: false
+  slack: false
+  telegram: false
+  cli: false
+
+versioning:
+  enabled: true               # activar ANTES de editar producción
+
+publishing_policy:
+  require_second_approver: true
+  min_eval_pass_rate: 90
+
+guardrails:                  # Enterprise - Monitor → Classifiers (inicia en shadow mode)
+  classifiers: [prompt_injection, off_topic, urgency, sentiment]
+  mode: shadow                # pasar a enforce tras 2 semanas de observación
+  restrict_automatically: false
+
+budget:
+  monthly_limit_usd: TBD
+  alerts_percent: [50, 80, 100]
+
+evaluations:
+  dataset: eval-it-helpdesk   # ver harness/evals/eval-dataset.json
+  tools_during_run: mock
+
+retention:
+  conversations_days: 365

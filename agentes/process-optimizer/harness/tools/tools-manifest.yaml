@@ -1,0 +1,25 @@
+# Manifiesto de tools - Process Improvement Scout
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: search_sop
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Buscar SOP y flujogramas vigentes del proceso."
+  - name: query_cycle_time
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Calcular tiempos de ciclo y espera por etapa desde logs de eventos."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: draft_automation_map
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Construir mapa AS-IS/TO-BE y backlog de automatización."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

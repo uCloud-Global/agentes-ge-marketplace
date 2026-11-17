@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Project PMO Copilot",
+  "description": "Consolida actas, hitos y bloqueos; genera estados de proyecto y próximos compromisos.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/pmo-copilot",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "project-report",
+      "name": "project-report",
+      "description": "El usuario pide status semanal, riesgos o estado de proyectos.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": [
+        "Prepara el informe semanal de los proyectos y sus principales riesgos."
+      ]
+    },
+    {
+      "id": "meeting-minutes",
+      "name": "meeting-minutes",
+      "description": "El usuario pide acta o resumen de reunión.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": []
+    },
+    {
+      "id": "risk-register",
+      "name": "risk-register",
+      "description": "Se pide actualizar el registro de riesgos.",
+      "tags": [
+        "operaciones"
+      ],
+      "examples": []
+    }
+  ]
+}

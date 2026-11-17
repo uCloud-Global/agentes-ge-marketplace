@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Commercial Proposal Studio",
+  "description": "Arma propuestas usando contexto de cliente, catálogo de servicios y pricing autorizado.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/proposal-builder",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "proposal-writing",
+      "name": "proposal-writing",
+      "description": "El usuario pide preparar una propuesta, cotización u oferta de servicios.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": [
+        "Prepara una propuesta de servicios para la oportunidad ACME en HubSpot."
+      ]
+    },
+    {
+      "id": "scope-estimator",
+      "name": "scope-estimator",
+      "description": "El usuario pide estimar esfuerzo, fases o equipo de un proyecto.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    },
+    {
+      "id": "pricing-guardrail",
+      "name": "pricing-guardrail",
+      "description": "Se menciona descuento, precio especial o condición no estándar.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    }
+  ]
+}

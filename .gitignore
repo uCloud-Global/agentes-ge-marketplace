@@ -1,0 +1,10 @@
+# Portal HTML original (contiene capturas de la interfaz del workspace): fuera del repo público
+Agentes GE.html
+
+# Sistema / herramientas
+.DS_Store
+__pycache__/
+*.pyc
+
+# Generador local de los kits (no se versiona)
+_kit-generator/

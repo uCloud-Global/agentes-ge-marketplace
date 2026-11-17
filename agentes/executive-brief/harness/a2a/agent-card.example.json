@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Executive Intelligence",
+  "description": "Sintetiza indicadores, riesgos, clientes clave y decisiones en un briefing verificable para líderes.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/executive-brief",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "executive-report",
+      "name": "executive-report",
+      "description": "El usuario pide un resumen ejecutivo, briefing semanal/mensual o preparación de comité con KPIs, riesgos y decisiones.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": [
+        "Resume resultados de esta semana, riesgos y decisiones pendientes para comité."
+      ]
+    },
+    {
+      "id": "kpi-variance-explainer",
+      "name": "kpi-variance-explainer",
+      "description": "El usuario pregunta por qué cambió un indicador o pide explicar una desviación contra meta.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": []
+    },
+    {
+      "id": "decision-log-tracker",
+      "name": "decision-log-tracker",
+      "description": "El usuario pide el estado de decisiones o compromisos de comité.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": []
+    }
+  ]
+}

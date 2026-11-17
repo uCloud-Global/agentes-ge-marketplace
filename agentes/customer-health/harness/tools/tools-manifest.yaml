@@ -1,0 +1,33 @@
+# Manifiesto de tools - Customer Success Health
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: get_account_usage
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer uso de producto por cuenta (logins, features, consumo) de vistas allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_support_history
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer tickets, CSAT y escalamientos de la cuenta."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: compute_health
+    source: workstation
+    route: "Deep Agent - Workstation / sandbox (Python)"
+    effect: compute
+    ask_before_call: true
+    purpose: "Calcular health score con la fórmula documentada (Python en Workstation) o API equivalente."
+    note: "Deep Agent ejecuta Python en Workstation/sandbox (Enterprise). Alternativa: Custom Tool a Cloud Run."
+  - name: draft_retention_plan
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar plan de retención con acciones medibles."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."

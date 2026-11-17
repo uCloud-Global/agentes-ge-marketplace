@@ -1,0 +1,40 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "People Policy Advisor",
+  "description": "Responde preguntas sobre políticas internas con referencias, país y vigencia.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/people-policy",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "policy-answer",
+      "name": "policy-answer",
+      "description": "El colaborador pregunta por una política interna (vacaciones, viáticos, beneficios, reglamento).",
+      "tags": [
+        "talento"
+      ],
+      "examples": [
+        "¿Cuál es la política de viáticos cuando viajo de Colombia a Chile?"
+      ]
+    },
+    {
+      "id": "policy-gap-escalation",
+      "name": "policy-gap-escalation",
+      "description": "La política no cubre el caso o hay ambigüedad.",
+      "tags": [
+        "talento"
+      ],
+      "examples": []
+    }
+  ]
+}

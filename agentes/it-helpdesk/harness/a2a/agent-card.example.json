@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "IT Helpdesk Concierge",
+  "description": "Resuelve incidencias frecuentes con base de conocimiento y crea tickets con contexto.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/it-helpdesk",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "helpdesk-triage",
+      "name": "helpdesk-triage",
+      "description": "El usuario reporta un problema técnico o pide soporte de TI.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": [
+        "No puedo ingresar a la VPN. ¿Qué debo probar y puedes crear un ticket?"
+      ]
+    },
+    {
+      "id": "password-reset-guidance",
+      "name": "password-reset-guidance",
+      "description": "El usuario no puede ingresar o pide reset de contraseña/MFA.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": []
+    },
+    {
+      "id": "service-catalog-request",
+      "name": "service-catalog-request",
+      "description": "El usuario pide software, hardware o acceso.",
+      "tags": [
+        "tecnología"
+      ],
+      "examples": []
+    }
+  ]
+}

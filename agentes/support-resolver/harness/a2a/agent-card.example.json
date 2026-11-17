@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Customer Support Resolver",
+  "description": "Responde solicitudes usando políticas, historial CRM y tickets; escala situaciones complejas.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/support-resolver",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "support-resolution",
+      "name": "support-resolution",
+      "description": "Llega un caso o reclamo de cliente que requiere diagnóstico y respuesta.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": [
+        "Un cliente reclama por un cobro duplicado: revisa antecedentes y prepara respuesta."
+      ]
+    },
+    {
+      "id": "escalation-triage",
+      "name": "escalation-triage",
+      "description": "Caso de alto riesgo: fraude, legal, cliente VIP, amenaza de churn o reembolso fuera de política.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": []
+    },
+    {
+      "id": "refund-policy-check",
+      "name": "refund-policy-check",
+      "description": "El caso involucra cobros, reembolsos o créditos.",
+      "tags": [
+        "clientes"
+      ],
+      "examples": []
+    }
+  ]
+}

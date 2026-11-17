@@ -1,0 +1,39 @@
+# Manifiesto de tools - Customer Support Resolver
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: lookup_customer
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Identificar al cliente y verificar identidad con datos del CRM."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: search_kb
+    source: kb
+    route: "Knowledge Base de VirtuAI (RAG)"
+    effect: read
+    ask_before_call: n/a
+    purpose: "Buscar FAQs, SLA, políticas de devolución y base de soluciones."
+  - name: get_ticket
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer ticket, historial y prioridad."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: draft_reply
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: draft
+    ask_before_call: true
+    purpose: "Crear BORRADOR de respuesta al cliente (no enviar)."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: update_ticket
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: write
+    ask_before_call: true
+    purpose: "Actualizar estado/nota/prioridad del ticket. Escritura con Ask."
+    mcp_tool_real: "<confirmar en List tools>"

@@ -1,0 +1,34 @@
+{
+  "_comment": "Valores para Build → Tools → Add tool (formulario New Tool de VirtuAI). No es un archivo de importación nativo; el endpoint es ilustrativo y debe implementarse.",
+  "Tool Name": "extract_cv_evidence",
+  "LLM Description": "Extraer evidencias profesionales pertinentes de un CV autorizado, eliminando atributos protegidos. Úsala solo cuando la tarea de talento lo requiera. Envía únicamente los parámetros necesarios; si recibes 400/403/404/429/5xx o timeout, informa el error y no inventes resultados. No modifica registros.",
+  "Visual Description": "Extraer evidencias profesionales pertinentes de un CV autorizado, eliminando atributos protegidos.",
+  "API Endpoint": "https://TU-SERVICIO.run.app/v1/agents/talent-selection/extract_cv_evidence",
+  "HTTP Method": "POST",
+  "Timeout (seconds)": 60,
+  "Ask before each call": true,
+  "Headers (JSON)": {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  },
+  "Authentication": "Google Cloud Run (IAM / Service Account)",
+  "Parameters": [
+    {
+      "name": "job_id",
+      "type": "string",
+      "description": "Vacante a comparar",
+      "required": true
+    },
+    {
+      "name": "candidate_document_id",
+      "type": "string",
+      "description": "ID interno del CV autorizado; sin PII en el prompt",
+      "required": true
+    }
+  ],
+  "Backend requirements": [
+    "Validar autorización por registro/entidad en el backend (el modelo no valida permisos).",
+    "Rechazar parámetros fuera de esquema; no aceptar rutas/URLs arbitrarias.",
+    "Responder JSON; errores con código HTTP real (VirtuAI no reintenta)."
+  ]
+}

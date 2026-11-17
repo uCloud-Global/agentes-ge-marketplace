@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Strategic Opportunity Radar",
+  "description": "Cruza señales del mercado con prioridades internas para proponer oportunidades y alertas.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/strategy-radar",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "strategic-radar",
+      "name": "strategic-radar",
+      "description": "El usuario pide identificar, priorizar o actualizar oportunidades estratégicas o señales de mercado.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": [
+        "¿Qué oportunidades estratégicas emergieron este trimestre y cuáles priorizamos?"
+      ]
+    },
+    {
+      "id": "market-signal-scan",
+      "name": "market-signal-scan",
+      "description": "El usuario pide revisar tendencias, competidores o regulación externa.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": []
+    },
+    {
+      "id": "initiative-prioritization",
+      "name": "initiative-prioritization",
+      "description": "El usuario pide priorizar iniciativas del roadmap o comparar alternativas.",
+      "tags": [
+        "dirección"
+      ],
+      "examples": []
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Campaign Launch Copilot",
+  "description": "Planea campañas alineadas al CRM y prepara contenidos y audiencias para revisión.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/campaign-copilot",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "campaign-planning",
+      "name": "campaign-planning",
+      "description": "El usuario pide diseñar una campaña, reactivación o lanzamiento.",
+      "tags": [
+        "marketing"
+      ],
+      "examples": [
+        "Diseña una campaña de reactivación para clientes sin actividad en 90 días."
+      ]
+    },
+    {
+      "id": "copy-variants",
+      "name": "copy-variants",
+      "description": "El usuario pide asuntos, copies o variantes A/B.",
+      "tags": [
+        "marketing"
+      ],
+      "examples": []
+    },
+    {
+      "id": "compliance-check",
+      "name": "compliance-check",
+      "description": "Antes de programar o cuando se pide revisar una pieza.",
+      "tags": [
+        "marketing"
+      ],
+      "examples": []
+    }
+  ]
+}

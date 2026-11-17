@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Enterprise Data Analyst",
+  "description": "Traduce preguntas de negocio a consultas SQL gobernadas y explica resultados con trazabilidad.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/sql-analyst",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "governed-sql",
+      "name": "governed-sql",
+      "description": "El usuario hace una pregunta de negocio que requiere datos tabulares.",
+      "tags": [
+        "datos"
+      ],
+      "examples": [
+        "¿Cómo varió el revenue por región en los últimos seis meses?"
+      ]
+    },
+    {
+      "id": "metric-definition-check",
+      "name": "metric-definition-check",
+      "description": "Ambigüedad en la definición de una métrica.",
+      "tags": [
+        "datos"
+      ],
+      "examples": []
+    },
+    {
+      "id": "query-cost-guard",
+      "name": "query-cost-guard",
+      "description": "La consulta procesa muchos datos.",
+      "tags": [
+        "datos"
+      ],
+      "examples": []
+    }
+  ]
+}

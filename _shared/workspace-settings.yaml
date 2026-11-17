@@ -1,0 +1,65 @@
+# Configuración compartida del workspace VirtuAI para los 26 agentes de Agentes GE
+# Settings → Workspace settings (cada clave corresponde a un setting documentado en docs.imvirtuai.com/reference/settings/)
+# Los valores <set-me> son secretos: nunca en el repo ni en prompts.
+
+workspace_strategy:
+  # Un cliente A2A puede invocar TODOS los agentes A2A del workspace → separar por sensibilidad.
+  - name: ge-general            # Dirección, Ventas, Marketing, Clientes, Operaciones, Datos, Tecnología
+  - name: ge-finanzas-legal     # Finanzas, Compras, Legal
+  - name: ge-talento-confidencial   # Talento (onboarding, people-policy, talent-selection)
+  - name: ge-seguridad          # access-auditor
+
+general:
+  SYSTEM_NAME: "Agentes GE"
+  DEFAULT_LANGUAGE: spanish
+  WORKSPACE_TIMEZONE: America/Bogota
+
+models:
+  VERTEX_AI_SERVICE_ACCOUNT_JSON: <set-me>
+  VERTEX_AI_PROJECT_ID: <gcp-project>
+  VERTEX_AI_LOCATION: us-central1
+  # GOOGLE_API_KEY: <set-me>     # alternativa AI Studio (no recomendada en producción)
+
+embeddings:
+  EMBEDDING_PROVIDER: google
+  EMBEDDING_MODEL: text-embedding-004
+
+mcp_oauth:
+  GOOGLE_MCP_CLIENT_ID: <set-me>
+  GOOGLE_MCP_CLIENT_SECRET: <set-me>
+  GOOGLE_MCP_REDIRECT_URI: https://<host-virtuai>/api/oauth/google/callback   # confirmar la URI exacta de tu instancia
+  HUBSPOT_MCP_CLIENT_ID: <set-me>
+  HUBSPOT_MCP_CLIENT_SECRET: <set-me>
+
+custom_tools:
+  CLOUD_RUN_SERVICE_ACCOUNT_JSON: <set-me>   # SA con roles/run.invoker SOLO sobre los servicios de tools
+
+channels:
+  INTEGRATION_KEYS_ENFORCED: true
+
+sandboxes:   # Enterprise: Workstation para customer-health, cashflow-analyst, process-optimizer, talent-selection
+  E2B_API_KEY: <set-me>
+
+evaluations:
+  EVAL_JUDGE_PROVIDER: vertex-ai
+  EVAL_JUDGE_MODEL: "<Gemini Pro GA>"
+  EVAL_ONLINE_ENABLED: false
+  EVAL_ONLINE_SAMPLE_PERCENT: 5
+  EVAL_ONLINE_DAILY_CAP: 50
+
+retention:
+  conversations.retention_days: 365   # Talento/Seguridad: 90 en su workspace
+
+predefined_mcp_servers:   # Build → MCP Servers → Create server → Predefined (crear una vez, adjuntar por agente)
+  - gmail
+  - google-drive
+  - google-calendar
+  - bigquery
+  - cloud-logging
+  - cloud-monitoring
+  - hubspot
+
+classifiers:   # Monitor → Classifiers (Enterprise) - iniciar en shadow mode
+  builtin: [prompt_injection, sql_risk, shell_risk]
+  business: [off_topic, sentiment, urgency]
+  restrict_automatically: false

@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Lead Qualification Agent",
+  "description": "Enriquece y prioriza leads según ICP, datos CRM y reglas de calificación definidas.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/lead-qualification",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "lead-scoring",
+      "name": "lead-scoring",
+      "description": "El usuario pide clasificar, priorizar o calificar leads entrantes.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": [
+        "Clasifica los leads entrantes y dime cuáles necesita contactar ventas hoy."
+      ]
+    },
+    {
+      "id": "icp-fit-explainer",
+      "name": "icp-fit-explainer",
+      "description": "El usuario pregunta por qué un lead tiene cierto score o si encaja con el ICP.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    },
+    {
+      "id": "lead-routing",
+      "name": "lead-routing",
+      "description": "El usuario pide asignar leads a vendedores.",
+      "tags": [
+        "ventas"
+      ],
+      "examples": []
+    }
+  ]
+}

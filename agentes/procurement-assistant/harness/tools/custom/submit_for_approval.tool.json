@@ -1,0 +1,41 @@
+{
+  "_comment": "Valores para Build → Tools → Add tool (formulario New Tool de VirtuAI). No es un archivo de importación nativo; el endpoint es ilustrativo y debe implementarse.",
+  "Tool Name": "submit_for_approval",
+  "LLM Description": "Enviar requisición al flujo de aprobación del ERP. Escritura con Ask. Úsala solo cuando la tarea de compras lo requiera. Envía únicamente los parámetros necesarios; si recibes 400/403/404/429/5xx o timeout, informa el error y no inventes resultados. Acción con efectos: solo después de aprobación explícita del usuario.",
+  "Visual Description": "Enviar requisición al flujo de aprobación del ERP. Escritura con Ask.",
+  "API Endpoint": "https://TU-SERVICIO.run.app/v1/agents/procurement-assistant/submit_for_approval",
+  "HTTP Method": "POST",
+  "Timeout (seconds)": 30,
+  "Ask before each call": true,
+  "Headers (JSON)": {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  },
+  "Authentication": "Google Cloud Run (IAM / Service Account)",
+  "Parameters": [
+    {
+      "name": "record_id",
+      "type": "string",
+      "description": "Referencia del recurso de negocio",
+      "required": true
+    },
+    {
+      "name": "payload",
+      "type": "object",
+      "description": "Datos requeridos con esquema validado",
+      "required": true
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "description": "Clave de idempotencia para evitar duplicados",
+      "required": true
+    }
+  ],
+  "Backend requirements": [
+    "Validar autorización por registro/entidad en el backend (el modelo no valida permisos).",
+    "Rechazar parámetros fuera de esquema; no aceptar rutas/URLs arbitrarias.",
+    "Responder JSON; errores con código HTTP real (VirtuAI no reintenta).",
+    "Exigir request_id (idempotencia) y registrar auditoría de la escritura."
+  ]
+}

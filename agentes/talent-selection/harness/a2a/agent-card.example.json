@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Talent Selection Evidence Analyst",
+  "description": "Contrasta los requisitos objetivos de una vacante con evidencias aportadas por CVs, construye una matriz uniforme y genera un radar polar para revisión humana. No decide contrataciones.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/talent-selection",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "cv-competency-review",
+      "name": "cv-competency-review",
+      "description": "RR. HH. pide comparar CVs autorizados contra la rúbrica de una vacante.",
+      "tags": [
+        "talento"
+      ],
+      "examples": [
+        "Para la vacante Analista de Datos, compara tres CV ficticios con criterios predefinidos; muestra evidencias, vacíos y un gráfico radar para revisión de RR. HH."
+      ]
+    },
+    {
+      "id": "bias-safeguard",
+      "name": "bias-safeguard",
+      "description": "Siempre que se procesen CVs o se pida ordenar/descartar candidatos.",
+      "tags": [
+        "talento"
+      ],
+      "examples": []
+    },
+    {
+      "id": "interview-guide",
+      "name": "interview-guide",
+      "description": "Se pide preparar entrevista estructurada.",
+      "tags": [
+        "talento"
+      ],
+      "examples": []
+    }
+  ]
+}

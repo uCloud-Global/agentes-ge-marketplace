@@ -1,0 +1,41 @@
+# Manifiesto de tools - Lead Qualification Agent
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: find_contact
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: read
+    ask_before_call: false
+    purpose: "Buscar el contacto/empresa en HubSpot y deduplicar."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_lead_signals
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer señales de comportamiento (visitas, descargas, uso de trial) desde vistas allowlisted."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: search_mail
+    source: mcp:gmail
+    route: "MCP predefinido - Gmail"
+    effect: read
+    ask_before_call: false
+    purpose: "Revisar respuestas del lead a campañas o formularios (solo lectura)."
+    mcp_tool_real: "<confirmar en List tools>"
+    added_in_kit: true   # no estaba en el HTML; cubre un conector declarado
+  - name: score_lead
+    source: custom
+    route: "Custom Tool HTTP - Cloud Run (IAM)"
+    effect: compute
+    ask_before_call: false
+    purpose: "Calcular score ICP determinístico con reglas MQL/SQL versionadas; devuelve puntaje y señales usadas."
+    config: harness/tools/custom/score_lead.tool.json
+  - name: create_sales_task
+    source: mcp:hubspot
+    route: "MCP predefinido - HubSpot"
+    effect: write
+    ask_before_call: true
+    purpose: "Crear tarea de seguimiento para el owner. Escritura con Ask."
+    mcp_tool_real: "<confirmar en List tools>"

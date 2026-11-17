@@ -1,0 +1,49 @@
+{
+  "_comment": "Plantilla ilustrativa. Para registrar en Gemini Enterprise usa el JSON REAL publicado en https://<host>/a2a/<agent-id>/.well-known/agent-card.json",
+  "protocolVersion": "0.3",
+  "name": "Contract Review Assistant",
+  "description": "Analiza cláusulas contractuales frente a plantillas, obligaciones y políticas legales.",
+  "url": "https://TU-HOST-VIRTUAI/a2a/contract-reviewer",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "contract-review",
+      "name": "contract-review",
+      "description": "El usuario pide revisar un contrato, NDA o adenda frente al estándar.",
+      "tags": [
+        "legal"
+      ],
+      "examples": [
+        "Revisa este NDA e identifica desviaciones frente a nuestro estándar."
+      ]
+    },
+    {
+      "id": "nda-quick-check",
+      "name": "nda-quick-check",
+      "description": "Revisión rápida de NDA.",
+      "tags": [
+        "legal"
+      ],
+      "examples": []
+    },
+    {
+      "id": "obligation-extractor",
+      "name": "obligation-extractor",
+      "description": "Se piden obligaciones, fechas o renovaciones de un contrato.",
+      "tags": [
+        "legal"
+      ],
+      "examples": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Knowledge Base - Compliance Control Monitor  (Build → Knowledge Base → Create Knowledge Base)
+name: kb-compliance-monitor
+description: "Documentos aprobados de Legal para Compliance Control Monitor: Matriz controles; Manual compliance; Calendario de obligaciones. Consultar para políticas, definiciones y procedimientos; no contiene datos en vivo."
+documents:   # PDF, DOCX, XLSX/XLS, CSV, PPTX (solo texto; PDFs escaneados fallan)
+  - "Matriz controles"
+  - "Manual compliance"
+  - "Calendario de obligaciones"
+advanced_rag:
+  chunk_size: 1500
+  chunk_overlap: 200
+  results_per_query: 6
+  score_threshold: 0.2
+  search_strategy: "Similarity"
+governance:
+  - "Una KB compartida NO replica los ACL de Drive: subir solo documentos visibles para todos los usuarios del agente."
+  - "Datos en vivo: vía MCP o Custom Tool, no vía KB."
+  - "Esperar estado completed y probar recuperación de pasajes antes de publicar."

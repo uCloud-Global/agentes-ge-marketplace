@@ -1,0 +1,33 @@
+# Manifiesto de tools - Cashflow Forecast Analyst
+# Los nombres son de DISEÑO (capacidades). Para MCP predefinidos, mapear al nombre real en
+# Build → MCP Servers → [servidor] → List tools y deshabilitar el resto.
+
+tools:
+  - name: read_cashflow
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer históricos de caja por cuenta y entidad."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: get_ar_ap
+    source: mcp:bigquery
+    route: "MCP predefinido - BigQuery"
+    effect: read
+    ask_before_call: false
+    purpose: "Leer cartera (AR) y cuentas por pagar (AP) con vencimientos."
+    mcp_tool_real: "<confirmar en List tools>"
+  - name: calculate_scenarios
+    source: workstation
+    route: "Deep Agent - Workstation / sandbox (Python)"
+    effect: compute
+    ask_before_call: true
+    purpose: "Proyectar 12 semanas en Python (pandas) con escenarios base/optimista/pesimista."
+    note: "Deep Agent ejecuta Python en Workstation/sandbox (Enterprise). Alternativa: Custom Tool a Cloud Run."
+  - name: draft_forecast
+    source: llm
+    route: "Razonamiento del modelo (sin API)"
+    effect: llm
+    ask_before_call: n/a
+    purpose: "Redactar el informe de pronóstico con supuestos explícitos."
+    note: "No requiere tool: lo resuelve el modelo siguiendo la skill. Crear tool solo si se necesita persistir el artefacto."
